@@ -1,6 +1,7 @@
 (ns day7.core-test
   (:require [clojure.test :refer :all]
-            [day7.core :refer :all]))
+            [day7.core :refer :all]
+            [st-utils.core :as su]))
 
 (deftest test-eval-atom
   (is (= 123 (eval-atom "123" {})))
@@ -29,10 +30,10 @@
   (is (= 65535 (to-16-bits  -1))))
 
 (deftest test-small
-  (is (=  {:d 72 :e 507 :f 492 :g 114 :h 65412 :i 65079 :x 123 :y 456}
-          (apply-all-wires "abc.txt")))
-  (is (=  {:a 3 :b 4 :c 7}
-          (apply-all-wires "order.txt"))))
+   (is (=  {:d 72 :e 507 :f 492 :g 114 :h 65412 :i 65079 :x 123 :y 456}
+           (apply-all-wires (su/read-strings "abc.txt"))))
+   (is (=  {:a 3 :b 4 :c 7}
+           (apply-all-wires (su/read-strings "order.txt")))))
 
 (deftest test-unknown-left
   (is (unknown-left? {} "a AND x -> cx"))
@@ -47,6 +48,13 @@
   (is (not (unknown-left? {:a 1} "a -> cx"))))
 
 (deftest test-sol
-  (is (= 956 (-> "input.txt"
-                 apply-all-wires
+  (is (= 956 (->  "input.txt"
+                  su/read-strings
+                  apply-all-wires
                  :a))))
+
+(deftest test-sol2
+  (is (= 40149 (->  "input0.txt"
+                    su/read-strings
+                    apply-all-wires
+                    :a))))

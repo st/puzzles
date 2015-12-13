@@ -1,7 +1,6 @@
 (ns day7.core
   (require
-    [clojure.string :as string]
-    [st-utils.core :as su]))
+    [clojure.string :as string]))
 
 (defn to-16-bits
   [n]
@@ -65,10 +64,6 @@
         result          (assoc context target left-value)]
     result))
 
-(defn extract-wires
-  [input]
-  (su/read-strings input))
-
 (defn extract-vals
   [tokens]
   (condp = (count tokens)
@@ -88,8 +83,8 @@
     (some (partial unknown? context) vals)))
 
 (defn apply-all-wires
-  [input]
-  (loop [context {} [wire & next-wires] (extract-wires input)]
+  [wires]
+  (loop [context {} [wire & next-wires] wires]
     (if (nil? wire)
       context
       (if (unknown-left? context wire)
