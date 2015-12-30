@@ -4,8 +4,8 @@
 (defn distance
   [time [speed flight rest]]
   (let [flight-rest (+ flight rest)
-        n-full (quot time flight-rest)
-        remain (rem time flight-rest)]
+        n-full      (quot time flight-rest)
+        remain      (rem time flight-rest)]
     (* speed (+ (* flight n-full) (min flight remain)))))
 
 (defn distance2
@@ -89,8 +89,3 @@
 (defn best-score
   [perfs]
   (apply max (map second (vals perfs))))
-
-(defn winner
-  []
-  (apply max
-    (map (partial distance 2503) (read-input))))

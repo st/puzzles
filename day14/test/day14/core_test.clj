@@ -74,6 +74,12 @@
     10
     (best-score {:a [20 10] :b [25 1] :c [22 5]}))))
 
+(deftest sol1
+  (is (= 2696
+         (-> (nth (distance-beasts) 2502)
+             add-lead
+             best-distance))))
+
 (deftest sol2
   (is (=
         1084
