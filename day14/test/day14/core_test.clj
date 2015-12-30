@@ -16,7 +16,7 @@
 (deftest test-read-beasts-names
   (is (=
     [:Rudolph :Cupid :Prancer :Donner :Dasher :Comet :Blitzen :Vixen :Dancer]
-    (beasts-names))))
+    beasts-names)))
 
 (deftest test-distance-beast
   (is (= 66 (distance-beast 3 :Rudolph))))

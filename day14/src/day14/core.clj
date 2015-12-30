@@ -37,19 +37,21 @@
         st/read-strings
         (reduce record-beast {})))
 
-(defn beasts-names
-  []
-  (keys (read-input)))
+(def map-beasts
+  (read-input))
+
+(def beasts-names
+  (keys map-beasts))
 
 (defn distance-beast
   [t beast-name]
-  (distance t (beast-name (read-input))))
+  (distance t (beast-name map-beasts)))
 
 (defn distance-beasts
   ([]
    (map distance-beasts (rest (range))))
   ([t]
-   (zipmap (beasts-names) (map (partial distance-beast t) (beasts-names)))))
+   (zipmap beasts-names (map (partial distance-beast t) beasts-names))))
 
 (defn add-lead
   [m]
